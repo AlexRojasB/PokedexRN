@@ -11,12 +11,16 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {HomeScreen} from './src/screens';
+import {Provider} from 'react-redux';
+import Store from './src/store/Store';
 
 const App = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <HomeScreen />
-    </SafeAreaView>
+    <Provider store={Store}>
+      <SafeAreaView style={{flex: 1}}>
+        <HomeScreen />
+      </SafeAreaView>
+    </Provider>
   );
 };
 
