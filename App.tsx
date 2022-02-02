@@ -10,15 +10,15 @@
 
 import React from 'react';
 import {SafeAreaView} from 'react-native';
-import {HomeScreen} from './src/screens';
 import {Provider} from 'react-redux';
+import {PokemonListScreen} from './src/screens';
 import Store from './src/store/Store';
 
 const App = () => {
   return (
     <Provider store={Store}>
       <SafeAreaView style={{flex: 1}}>
-        <HomeScreen />
+        <PokemonListScreen />
       </SafeAreaView>
     </Provider>
   );
