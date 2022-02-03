@@ -9,12 +9,13 @@
  */
 
 import React from 'react';
+import type {Node} from 'react';
 import {SafeAreaView} from 'react-native';
 import {Provider} from 'react-redux';
-import {PokemonListScreen} from './src/screens';
 import Store from './src/store/Store';
+import PokemonListScreen from './src/screens/pokemonList/pokemonList.screen';
 
-const App = () => {
+const App: () => Node = () => {
   return (
     <Provider store={Store}>
       <SafeAreaView style={{flex: 1}}>

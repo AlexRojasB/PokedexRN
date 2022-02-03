@@ -1,6 +1,5 @@
 import {loadPokemons} from './PokemonActionTypes';
 
-export const LoadPokemons = (pag: number, offset: number) => ({
+export const LoadPokemons = () => ({
   type: loadPokemons,
-  payload: {page: pag, offset},
 });
