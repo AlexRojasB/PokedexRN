@@ -1,4 +1,5 @@
 import {StyleProp, ViewStyle} from 'react-native';
+import {Type} from '../../models';
 
 export interface PokemonRowProps {
   children?: React.ReactNode;
@@ -17,6 +18,8 @@ export interface PokemonRowProps {
 
   pokemonName: string;
   pokemonType: string;
+  pokemonImage: string;
+  pokemonTypes: Type[];
 
   /**
    * An optional status bar setting. Defaults to light-content.

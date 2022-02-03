@@ -3,8 +3,14 @@ import {FlatList, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {connect, useDispatch} from 'react-redux';
 import {pokeApi} from '../../api/reqRes.pokemon';
 import {PokemonRow} from '../../components/pokemonRow/pokemonRow.component';
-import {LoadPokemons} from '../../store/actions/PokemonActions';
+import {
+  LoadPokemons,
+  LoadPokemonsFromServer,
+  UpdatePokemon,
+} from '../../store/actions/PokemonActions';
 import {PokemonListProps} from './pokemonList.props';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Pokemon, PokemonGetResponse} from '../../models';
 
 const Item = ({item, onPress}) => (
   <TouchableOpacity onPress={onPress}>
@@ -12,41 +18,43 @@ const Item = ({item, onPress}) => (
       pokemonId={item.id}
       pokemonName={item.name}
       pokemonType={item.type}
+      pokemonImage={item?.sprites?.front_default}
+      pokemonTypes={item?.types}
     />
   </TouchableOpacity>
 );
 
-const DATA = [
-  {id: '1', name: 'Pikachu', type: 'Trueno'},
-  {id: '2', name: 'Pikachu', type: 'Trueno'},
-  {id: '3', name: 'Pikachu', type: 'Trueno'},
-  {id: '4', name: 'Pikachu', type: 'Trueno'},
-  {id: '5', name: 'Pikachu', type: 'Trueno'},
-  {id: '6', name: 'Pikachu', type: 'Trueno'},
-];
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PokemonListScreen = (props: PokemonListProps) => {
   const {pokemonStore} = props;
-  const [selectedId, setSelectedId] = React.useState(null);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    loadPokemons();
-    // pokeApi
-    //   .get('/v2/pokemon?limit=20&offset=0')
-    //   .then(res => {
-    //     console.log(res.data);
-    //   })
-    //   .catch(console.log);
+    loadPokemonList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadPokemons = () => {
-    dispatch(LoadPokemons());
+  const loadPokemonList = async () => {
+    const pokes = await AsyncStorage.getItem('pokemons');
+    if (pokes) {
+      const pokesObj: Pokemon[] = JSON.parse(pokes);
+      dispatch(LoadPokemons(pokesObj));
+    } else {
+      const {
+        data: {results},
+      } = await pokeApi.get<PokemonGetResponse>('/v2/pokemon?limit=151');
+      dispatch(LoadPokemonsFromServer(results));
+    }
+  };
+
+  const getPokemonDetail = async (pokemonId: number) => {
+    const pokemonDetail = await pokeApi.get<Pokemon>(`v2/pokemon/${pokemonId}`);
+    console.log(pokemonDetail.data);
+    dispatch(UpdatePokemon(pokemonDetail.data));
   };
 
   const renderItem = ({item}) => {
-    return <Item item={item} onPress={() => setSelectedId(item.id)} />;
+    return <Item item={item} onPress={() => getPokemonDetail(item.id)} />;
   };
 
   return (
@@ -61,7 +69,6 @@ const PokemonListScreen = (props: PokemonListProps) => {
         data={pokemonStore.pokemons}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        extraData={selectedId}
       />
     </>
   );

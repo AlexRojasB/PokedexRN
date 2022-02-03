@@ -1,10 +1,12 @@
+import {Move, Sprites, Type} from '.';
+
 export interface Pokemon {
   id: number;
   name: string;
-  image?: string;
+  sprites?: Sprites;
   height?: number;
   weight?: number;
-  type?: string;
-  movements?: string;
-  evolutions?: string;
+  type?: Type;
+  evolutions?: Pokemon[];
+  moves?: Move[];
 }

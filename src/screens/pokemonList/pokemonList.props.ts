@@ -14,6 +14,7 @@ export interface PokemonListProps {
    */
   preset?: PokemonListPresets;
 
+  pokemonStore?: any;
   /**
    * An optional background color
    */
