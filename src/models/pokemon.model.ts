@@ -6,7 +6,7 @@ export interface Pokemon {
   sprites?: Sprites;
   height?: number;
   weight?: number;
-  type?: Type;
+  types?: Type[];
   evolutions?: Pokemon[];
   moves?: Move[];
 }

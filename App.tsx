@@ -14,12 +14,26 @@ import {SafeAreaView} from 'react-native';
 import {Provider} from 'react-redux';
 import Store from './src/store/Store';
 import PokemonListScreen from './src/screens/pokemonList/pokemonList.screen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {HomeScreen} from './src/screens';
+import pokemonDetailScreen from './src/screens/pokemonDetail/pokemonDetail.screen';
+
+const Stack = createNativeStackNavigator();
 
 const App: () => Node = () => {
   return (
     <Provider store={Store}>
       <SafeAreaView style={{flex: 1}}>
-        <PokemonListScreen />
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Pokedex" component={PokemonListScreen} />
+            <Stack.Screen
+              name="PokemonDetail"
+              component={pokemonDetailScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </SafeAreaView>
     </Provider>
   );

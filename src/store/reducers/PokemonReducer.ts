@@ -10,10 +10,12 @@ import {
 interface PokeState {
   pokemons: Pokemon[];
   filteredPokemons: Pokemon[];
+  selectedPokemon: Pokemon;
 }
 const INITIAL_STATE: PokeState = {
   pokemons: [],
   filteredPokemons: [],
+  selectedPokemon: {} as Pokemon,
 };
 
 export default (state = INITIAL_STATE, action: any) => {
@@ -41,7 +43,11 @@ export default (state = INITIAL_STATE, action: any) => {
       let index = pokemons.findIndex(x => x.id === action.payload.id);
       pokemons[index] = action.payload;
       storeData('pokemons', pokemons);
-      return {...state, pokemons: [...pokemons]};
+      return {
+        ...state,
+        pokemons: [...pokemons],
+        selectedPokemon: action.payload,
+      };
     case filterPokemons:
       let filteredPokemons = state.pokemons.filter(x =>
         x.name.toLowerCase().includes(action.payload.toLowerCase()),

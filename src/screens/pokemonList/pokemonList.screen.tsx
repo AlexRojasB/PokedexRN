@@ -12,6 +12,7 @@ import {
 import {PokemonListProps} from './pokemonList.props';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Pokemon, PokemonGetResponse} from '../../models';
+import {CommonActions} from '@react-navigation/native';
 
 const Item = ({item, onPress}) => (
   <TouchableOpacity onPress={onPress}>
@@ -27,12 +28,13 @@ const Item = ({item, onPress}) => (
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PokemonListScreen = (props: PokemonListProps) => {
-  const {pokemonStore} = props;
+  const {pokemonStore, navigation} = props;
   const dispatch = useDispatch();
   const [text, onChangeText] = React.useState('');
 
   React.useEffect(() => {
     dispatch(FilterPokemons(text));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
 
   React.useEffect(() => {
@@ -57,6 +59,11 @@ const PokemonListScreen = (props: PokemonListProps) => {
     const pokemonDetail = await pokeApi.get<Pokemon>(`v2/pokemon/${pokemonId}`);
     console.log(pokemonDetail.data);
     dispatch(UpdatePokemon(pokemonDetail.data));
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: 'PokemonDetail',
+      }),
+    );
   };
 
   const renderItem = ({item}) => {

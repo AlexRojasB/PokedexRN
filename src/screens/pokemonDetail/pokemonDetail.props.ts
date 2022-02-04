@@ -1,8 +1,7 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StyleProp, ViewStyle} from 'react-native';
-import {PokemonListPresets, KeyboardOffsets} from './pokemonList.preset';
+import {PokemonDetailPresets, KeyboardOffsets} from './pokemonDetail.preset';
 
-export interface PokemonListProps extends NativeStackScreenProps<any, any> {
+export interface PokemonDetailProps {
   children?: React.ReactNode;
 
   /**
@@ -13,7 +12,7 @@ export interface PokemonListProps extends NativeStackScreenProps<any, any> {
   /**
    * One of the different types of presets.
    */
-  preset?: PokemonListPresets;
+  preset?: PokemonDetailPresets;
 
   pokemonStore?: any;
   /**
