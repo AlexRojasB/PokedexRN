@@ -5,3 +5,4 @@ export * from './move.model';
 export * from './sprites.model';
 export * from './type.model';
 export * from './trainer.model';
+export * from './team.model';

@@ -1,27 +1,25 @@
-import {Trainer} from '../../models';
+import {Team, Trainer} from '../../models';
 import {
+  addTeam,
   addTrainer,
-  loadTrainers,
+  selectedTeam,
   selectedTrainer,
 } from '../actions/TrainerActionTypes';
 
 interface TrainerState {
   trainers: Trainer[];
   selectedTrainer: Trainer;
+  teams: Team[];
 }
 
 const INITIAL_STATE: TrainerState = {
   trainers: [],
   selectedTrainer: {} as Trainer,
+  teams: [],
 };
 
 export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
-    case loadTrainers:
-      return {
-        ...state,
-        trainers: [...action.payload],
-      };
     case selectedTrainer:
       return {
         ...state,
@@ -32,6 +30,16 @@ export default (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         trainers: [...state.trainers, action.payload],
+      };
+    case addTeam:
+      return {
+        ...state,
+        teams: [...state.teams, action.payload],
+      };
+    case selectedTeam:
+      return {
+        ...state,
+        selectedTeam: action.payload,
       };
     default:
       return state;

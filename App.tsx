@@ -20,6 +20,8 @@ import {HomeScreen} from './src/screens';
 import pokemonDetailScreen from './src/screens/pokemonDetail/pokemonDetail.screen';
 import trainerEditScreen from './src/screens/trainerEdit/trainerEdit.screen';
 import trainerListScreen from './src/screens/trainerList/trainerList.screen';
+import teamListScreen from './src/screens/teamList/teamList.screen';
+import teamEditScreen from './src/screens/teamEdit/teamEdit.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,8 +36,10 @@ const App: () => Node = () => {
               name="PokemonDetail"
               component={pokemonDetailScreen}
             /> */}
-            <Stack.Screen name="TrainerList" component={trainerListScreen} />
-            <Stack.Screen name="Trainer" component={trainerEditScreen} />
+            {/* <Stack.Screen name="TrainerList" component={trainerListScreen} />
+            <Stack.Screen name="Trainer" component={trainerEditScreen} /> */}
+                <Stack.Screen name="TeamList" component={teamListScreen} />
+            <Stack.Screen name="Team" component={teamEditScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
