@@ -1,8 +1,6 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StyleProp, ViewStyle} from 'react-native';
-import {TrainerEditPresets, KeyboardOffsets} from './trainerEdit.presets';
 
-export interface TrainerEditProps extends NativeStackScreenProps<any, any> {
+export interface TrainerRowProps {
   children?: React.ReactNode;
 
   /**
@@ -11,16 +9,15 @@ export interface TrainerEditProps extends NativeStackScreenProps<any, any> {
   style?: StyleProp<ViewStyle>;
 
   /**
-   * One of the different types of presets.
-   */
-  preset?: TrainerEditPresets;
-
-  trainerStore?: any;
-  /**
    * An optional background color
    */
   backgroundColor?: string;
 
+  trainerName: string;
+  trainerImage: string;
+  traineLocation: string;
+  trainerPhone: string;
+  trainerId: number;
   /**
    * An optional status bar setting. Defaults to light-content.
    */
@@ -30,11 +27,6 @@ export interface TrainerEditProps extends NativeStackScreenProps<any, any> {
    * Should we not wrap in SafeAreaView? Defaults to false.
    */
   unsafe?: boolean;
-
-  /**
-   * By how much should we offset the keyboard? Defaults to none.
-   */
-  keyboardOffset?: KeyboardOffsets;
 
   /**
    * Should keyboard persist on screen tap. Defaults to handled.

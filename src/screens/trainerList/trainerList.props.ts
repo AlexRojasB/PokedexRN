@@ -1,8 +1,8 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StyleProp, ViewStyle} from 'react-native';
-import {TrainerEditPresets, KeyboardOffsets} from './trainerEdit.presets';
+import {TrainerListPresets, KeyboardOffsets} from './trainerList.presets';
 
-export interface TrainerEditProps extends NativeStackScreenProps<any, any> {
+export interface TrainerListProps extends NativeStackScreenProps<any, any> {
   children?: React.ReactNode;
 
   /**
@@ -13,7 +13,7 @@ export interface TrainerEditProps extends NativeStackScreenProps<any, any> {
   /**
    * One of the different types of presets.
    */
-  preset?: TrainerEditPresets;
+  preset?: TrainerListPresets;
 
   trainerStore?: any;
   /**

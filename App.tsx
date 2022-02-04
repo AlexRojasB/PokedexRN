@@ -19,6 +19,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from './src/screens';
 import pokemonDetailScreen from './src/screens/pokemonDetail/pokemonDetail.screen';
 import trainerEditScreen from './src/screens/trainerEdit/trainerEdit.screen';
+import trainerListScreen from './src/screens/trainerList/trainerList.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +34,8 @@ const App: () => Node = () => {
               name="PokemonDetail"
               component={pokemonDetailScreen}
             /> */}
-            <Stack.Screen name="Trainers" component={trainerEditScreen} />
+            <Stack.Screen name="TrainerList" component={trainerListScreen} />
+            <Stack.Screen name="Trainer" component={trainerEditScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
