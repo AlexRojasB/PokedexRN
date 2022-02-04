@@ -4,6 +4,7 @@ import {connect, useDispatch} from 'react-redux';
 import {pokeApi} from '../../api/reqRes.pokemon';
 import {PokemonRow} from '../../components/pokemonRow/pokemonRow.component';
 import {
+  FilterPokemons,
   LoadPokemons,
   LoadPokemonsFromServer,
   UpdatePokemon,
@@ -28,6 +29,11 @@ const Item = ({item, onPress}) => (
 const PokemonListScreen = (props: PokemonListProps) => {
   const {pokemonStore} = props;
   const dispatch = useDispatch();
+  const [text, onChangeText] = React.useState('');
+
+  React.useEffect(() => {
+    dispatch(FilterPokemons(text));
+  }, [text]);
 
   React.useEffect(() => {
     loadPokemonList();
@@ -59,14 +65,18 @@ const PokemonListScreen = (props: PokemonListProps) => {
 
   return (
     <>
-      <TextInput placeholder="Pokemon Name" />
+      <TextInput
+        placeholder="Pokemon Name"
+        onChangeText={onChangeText}
+        value={text}
+      />
       <View>
         <Text>Normal</Text>
         <Text>Trueno</Text>
         <Text>Fuego</Text>
       </View>
       <FlatList
-        data={pokemonStore.pokemons}
+        data={pokemonStore.filteredPokemons}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />

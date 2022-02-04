@@ -1,5 +1,6 @@
 import {NameUrl, Pokemon} from '../../models';
 import {
+  filterPokemons,
   loadPokemons,
   loadPokemonsServer,
   updatePokemon,
@@ -18,4 +19,9 @@ export const LoadPokemons = (pokemons: Pokemon[]) => ({
 export const UpdatePokemon = (pokemon: Pokemon) => ({
   type: updatePokemon,
   payload: pokemon,
+});
+
+export const FilterPokemons = (term: string) => ({
+  type: filterPokemons,
+  payload: term,
 });
