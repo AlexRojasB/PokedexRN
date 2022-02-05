@@ -24,28 +24,87 @@ import teamListScreen from './src/screens/teamList/teamList.screen';
 import teamEditScreen from './src/screens/teamEdit/teamEdit.screen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Stack = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const App: () => Node = () => {
   return (
     <Provider store={Store}>
       <SafeAreaView style={{flex: 1}}>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name="Pokedex" component={PokemonListScreen} />
-            <Stack.Screen
-              name="PokemonDetail"
-              component={pokemonDetailScreen}
-            /> 
-             <Stack.Screen name="TrainerList" component={trainerListScreen} />
-            <Stack.Screen name="Trainer" component={trainerEditScreen} /> 
-                <Stack.Screen name="TeamList" component={teamListScreen} />
-            <Stack.Screen name="Team" component={teamEditScreen} />
-          </Stack.Navigator>
+          <Tab.Navigator
+            screenOptions={{
+              tabBarShowLabel: false,
+              tabBarStyle: {
+                position: 'absolute',
+                bottom: 25,
+                left: 20,
+                right: 20,
+                elevation: 0,
+                backgroundColor: '#fff',
+                borderRadius: 15,
+                height: 90,
+              },
+            }}>
+            <Tab.Screen
+              name="Pokedex"
+              component={Pokemon}
+              options={{headerShown: false}}
+            />
+            <Tab.Screen
+              name="Trainers"
+              component={Trainer}
+              options={{headerShown: false}}
+            />
+            <Tab.Screen
+              name="Teams"
+              component={Team}
+              options={{headerShown: false}}
+            />
+          </Tab.Navigator>
         </NavigationContainer>
       </SafeAreaView>
     </Provider>
   );
 };
+
+function Pokemon() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Pokemon" component={PokemonListScreen} />
+      <Stack.Screen
+        name="PokemonDetail"
+        component={pokemonDetailScreen}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function Trainer() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="TrainerList"
+        component={trainerListScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen name="Trainer" component={trainerEditScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function Team() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="TeamList" component={teamListScreen} />
+      <Stack.Screen
+        name="Team"
+        component={teamEditScreen}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default App;
