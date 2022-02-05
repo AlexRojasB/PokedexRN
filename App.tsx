@@ -22,8 +22,9 @@ import trainerEditScreen from './src/screens/trainerEdit/trainerEdit.screen';
 import trainerListScreen from './src/screens/trainerList/trainerList.screen';
 import teamListScreen from './src/screens/teamList/teamList.screen';
 import teamEditScreen from './src/screens/teamEdit/teamEdit.screen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator();
+const Stack = createBottomTabNavigator();
 
 const App: () => Node = () => {
   return (
@@ -31,13 +32,13 @@ const App: () => Node = () => {
       <SafeAreaView style={{flex: 1}}>
         <NavigationContainer>
           <Stack.Navigator>
-            {/* <Stack.Screen name="Pokedex" component={PokemonListScreen} />
+            <Stack.Screen name="Pokedex" component={PokemonListScreen} />
             <Stack.Screen
               name="PokemonDetail"
               component={pokemonDetailScreen}
-            /> */}
-            {/* <Stack.Screen name="TrainerList" component={trainerListScreen} />
-            <Stack.Screen name="Trainer" component={trainerEditScreen} /> */}
+            /> 
+             <Stack.Screen name="TrainerList" component={trainerListScreen} />
+            <Stack.Screen name="Trainer" component={trainerEditScreen} /> 
                 <Stack.Screen name="TeamList" component={teamListScreen} />
             <Stack.Screen name="Team" component={teamEditScreen} />
           </Stack.Navigator>
